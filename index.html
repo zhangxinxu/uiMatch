@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>uiMatch小工具</title>
+<link rel="stylesheet" href="uiMatch.css">
+</head>
+
+<body style="background-color:#ffffee;">
+<input id="bgColor" type="color" value="#ffffee" title="更换页面背景色">
+<a href="" class="new" target="_blank">新测试</a>
+<dialog open>
+	<form id="designForm" enctype="multipart/form-data">
+    	<h2>Step1: 请选择设计图</h2>
+    	<div class="list"><input id="designByUrl" type="radio" name="designType" checked><label for="designByUrl">使用URL地址</label>
+        	<p><input id="inputUrl" type="url" size="30" autofocus required></p>
+        </div>
+        <div class="list">
+        	<input id="designByLocal" type="radio" name="designType"><label for="designByLocal">本地上传</label>
+            <p><input id="inputFile" type="file" size="30" disabled required></p>
+        </div>
+        <div><input type="submit" value="确定"></div>
+    </form>
+</dialog>
+<dialog>
+	<form id="pageForm">
+    	<h2>Step2: 请输入页面地址</h2>
+    	<div class="list"><label for="pageTitle">页面标题：</label>
+        	<p><input id="pageTitle" required size="20" name="pageTitle"></p>
+        </div>
+        <div class="list">
+        	<label for="pageUrl">页面地址：</label>
+        	<p><input id="pageUrl" type="url" required size="30" name="pageUrl"></p>
+        </div>
+        <div class="list"><input type="submit" value="确定">
+        	<input id="backStepFirst" type="button" value="返回上一步">
+        </div>
+    </form>
+</dialog>
+<p id="pageOperate" class="page_operate">
+    <select data-key="opacity">
+        <option value="0">0%</option>
+        <option value="0.1">10%</option>
+        <option value="0.2">20%</option>
+        <option value="0.3">30%</option>
+        <option value="0.4">40%</option>
+        <option value="0.5" selected>50%</option>
+        <option value="0.6">60%</option>
+        <option value="0.7">70%</option>
+        <option value="0.8">80%</option>
+        <option value="0.9">90%</option>
+        <option value="1">100%</option>
+    </select>
+    <a href="javascript:" id="opacityRefer">修改透明度</a>
+    <select data-key="scale">
+        <option value="1" selected>100%</option>
+        <option value="1.5">150%</option>
+        <option value="2">200%</option>
+    </select>
+    <a href="javascript:" id="scaleRefer">更改比例</a>
+    <a href="javascript:" data-key="place">位置还原</a>
+    <a href="javascript:" data-key="fresh">刷新页面</a>
+</p>
+<script src="uiMatch.js"></script>
+</body>
+</html>
