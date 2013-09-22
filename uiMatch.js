@@ -62,7 +62,7 @@
 		if (!eleDesignBox) {
 			eleDesignBox = document.createElement("div");
 			eleDesignBox.id = "desighBox";
-			eleDesignBox.style.margin = "0 auto";
+			eleDesignBox.className = "design_box";
 			document.body.appendChild(eleDesignBox);
 		}
 		eleDesignBox.style.width = object.width + "px";
@@ -130,6 +130,8 @@
 						};
 						eleInputFile.dataObj = obj;
 						funDesighUrl(obj);
+						
+						elePageTitle && (elePageTitle.value = file.name.split(".")[0]);
 					};
 					image.src= url;
 				}
@@ -175,6 +177,7 @@
 			box.style.WebkitTransform = 'translateX(-50%) scale('+ scale +')';
 			box.style.transform = 'translateX(-50%) scale('+ scale +')';
 			if (eleRefer) eleRefer.innerHTML = '比例：' + scale * 100 + "%";
+			box.style.width = funDesighUrl.dataObj.width * (1 / scale) + "px";
 		},
 		place: function(box) {
 			box.style.marginTop = 0;
@@ -186,8 +189,9 @@
 	};
 	
 	// 插入页面图的方法
+	var elePageBox = $("#pageBox"), eleOperate = $("#pageOperate");
 	var funPageUrl = function(url) {
-		var elePageBox = $("#pageBox"), eleOperate = $("#pageOperate"), eleIframe = document.createElement("iframe");
+		var eleIframe = document.createElement("iframe");
 		if (!elePageBox) {
 			elePageBox = document.createElement("div");
 			elePageBox.id = "pageBox";
@@ -219,22 +223,23 @@
 				elePageBox.style.outline = "none";
 			});
 			
-			// operate
-			elePageBox.bind("click", function(event) {
-				var target = event.target, key = target && target.getAttribute("data-key");
-				if (key && target.tagName.toLowerCase() == "a") {
-					objPageOperate[key].call(target, this, eleIframe);
-				}
-			});
+			
 		}
 		if (eleOperate) {
 			// 载入操作
-			elePageBox.appendChild(eleOperate);
+			// elePageBox.appendChild(eleOperate);
 			$$("select", eleOperate).forEach(function(sel) {
 				sel.bind("change", function() {
 					var key = this.getAttribute("data-key");
 					objPageOperate[key].call(this, elePageBox, eleIframe);
 				});
+			});
+			// operate
+			eleOperate.bind("click", function(event) {
+				var target = event.target, key = target && target.getAttribute("data-key");
+				if (key && target.tagName.toLowerCase() == "a") {
+					objPageOperate[key].call(target, elePageBox, eleIframe);
+				}
 			});
 		}
 		// 载入iframe
@@ -253,14 +258,26 @@
 	}
 	
 	// 第二步确定
+	var isStepSecondSubmit = false;
 	if (eleFormPage && elePageTitle && elePageUrl) {
+		if (localStorage.pageUrl) {
+			elePageUrl.value = localStorage.pageUrl;
+		}
 		eleFormPage.bind("submit", function(event) {
 			document.title = document.title + " » " + elePageTitle.value;
 			funPageUrl(elePageUrl.value);
 			eleDialogs[1].removeAttribute("open");
+			isStepSecondSubmit = true;
+			localStorage.pageUrl = elePageUrl.value;
+			if (eleOperate) eleOperate.style.visibility = "visible"
 			event.preventDefault();
 		});
 	}
 	
 	// ---------- step2 end ---------
+	
+	
+	window.onbeforeunload = function() {
+		if (isStepSecondSubmit == true) return '';
+	};
 })();

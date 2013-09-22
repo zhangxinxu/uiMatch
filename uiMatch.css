@@ -85,9 +85,11 @@ input[type=color] {
 	border: 0 none;
 	font-size: 12px;
 }
-
+.design_box {
+	margin: 40px auto 0;
+}
 .page_box {
-	position: absolute; left: 50%;
+	position: absolute; left: 50%; top:40px;
 	-webkit-transform: translateX(-50%) scale(1);
 	transform: translateX(-50%) scale(1);
 	-webkit-transform-origin: center top;
@@ -109,12 +111,12 @@ input[type=color] {
 	left: 0; top: 0; bottom: 0; right: 0;
 }
 .page_operate {
-	position: absolute;
+	position: fixed; top: 0; left: 60px;
 	z-index: 1;
-	display: none;
+	visibility: hidden;
 }
 .page_box:hover .page_operate {
-	display: block;
+	visibility: visible;
 }
 
 .page_operate > a {
