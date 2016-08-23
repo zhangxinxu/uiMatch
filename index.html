@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="uiMatch.css">
 </head>
 
-<body style="background-color:#ffffee;">
-<input id="bgColor" type="color" value="#ffffee" title="更换页面背景色">
+<body style="background-color:#f0f3f9;">
+<input id="bgColor" type="color" value="#f0f3f9" title="更换页面背景色">
 <a href="" class="new" target="_blank">新测试</a>
 <dialog open>
 	<form id="designForm" enctype="multipart/form-data">
     	<h2>Step1: 请选择设计图</h2>
     	<div class="list"><input id="designByUrl" type="radio" name="designType"><label for="designByUrl">使用URL地址</label>
-        	<p><input id="inputUrl" type="url" size="30" disabled required></p>
+        	<p><input id="inputUrl" type="url" class="input-normal" size="30" disabled required></p>
         </div>
         <div class="list">
         	<input id="designByLocal" type="radio" name="designType" checked><label for="designByLocal">本地上传</label>
@@ -26,11 +26,11 @@
 	<form id="pageForm">
     	<h2>Step2: 请输入页面地址</h2>
     	<div class="list"><label for="pageTitle">页面标题：</label>
-        	<p><input id="pageTitle" required size="20" name="pageTitle" value="UI测试"></p>
+        	<p><input id="pageTitle" class="input-normal" required size="20" name="pageTitle" value="UI测试"></p>
         </div>
         <div class="list">
         	<label for="pageUrl">页面地址：</label>
-        	<p><input id="pageUrl" type="url" required size="30" name="pageUrl"></p>
+        	<p><input id="pageUrl" class="input-normal" type="url" required size="30" name="pageUrl"></p>
         </div>
         <div class="list"><input type="submit" value="确定">
         	<input id="backStepFirst" type="button" value="返回上一步">

@@ -223,7 +223,29 @@
 				elePageBox.style.outline = "none";
 			});
 			
-			
+			// 上下左右键微调
+			document.addEventListener("keyup", function(event) {
+				if (elePageBox) {
+					var top = parseInt(elePageBox.style.marginTop) || 0, left = parseInt(elePageBox.style.marginLeft) || 0;
+
+					if (event.keyCode == 37) {
+						left--;
+					} else if (event.keyCode == 38) {
+						top--;
+					} else if (event.keyCode == 39) {
+						left++;
+					} else if (event.keyCode == 40) {
+						top++;
+					}
+
+					if (event.keyCode >= 37 && event.keyCode <= 40) {
+						elePageBox.style.marginTop = top + 'px';
+						elePageBox.style.marginLeft = left + 'px';
+					}
+				}
+
+				event.preventDefault();
+			});
 		}
 		if (eleOperate) {
 			// 载入操作
@@ -269,7 +291,7 @@
 			eleDialogs[1].removeAttribute("open");
 			isStepSecondSubmit = true;
 			localStorage.pageUrl = elePageUrl.value;
-			if (eleOperate) eleOperate.style.visibility = "visible"
+			if (eleOperate) eleOperate.style.visibility = "visible";
 			event.preventDefault();
 		});
 	}
